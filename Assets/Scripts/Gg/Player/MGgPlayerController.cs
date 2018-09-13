@@ -49,19 +49,11 @@
 
         #region "Data Members"
 
-        public MGgPawn Pawn;
-
         #endregion // Data Members
 
         public override void Init()
         {
             base.Init();
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-            Init();
 
             // PlayerState
             GameObject gops = MonoBehaviour.Instantiate(FCgManager_Prefab.Get().EmptyGameObject);
@@ -83,6 +75,11 @@
             GameEventInfoPriorityList.Add(new FCgGameEventInfo()); // StopJump
             GameEventInfoPriorityList.Add(new FCgGameEventInfo()); // StartFire
             GameEventInfoPriorityList.Add(new FCgGameEventInfo()); // StopFire
+        }
+
+        // Use this for initialization
+        void Start()
+        {
         }
 
         protected override void PostProcessInput(float deltaTime)
