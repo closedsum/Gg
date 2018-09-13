@@ -19,7 +19,7 @@
 
         #endregion // Actions
 
-        #region "Game Events"
+            #region "Game Events"
 
         public List<FCgGameEventDefinition> GameEventDefinitions_Game;
 
@@ -27,7 +27,7 @@
 
         #endregion // Data Members
 
-        public FMtManager_Input() : base()
+        public FGgManager_Input() : base()
         {
             // Define Actions
             {
@@ -46,12 +46,23 @@
             GameEventDefinitions_Game = new List<FCgGameEventDefinition>();
 
             // Definitions, GameEvent, Action, Event
+
                 // MoveForward -> StartMoveForward
             CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StartMoveForward, EGgInputAction.MoveForward, ECgInputEvent.FirstPressed);
                 // MoveForward -> StopMoveForward
             CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StopMoveForward, EGgInputAction.MoveForward, ECgInputEvent.FirstReleased);
                 // MoveBackward -> StartMoveBackward
             CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StartMoveBackward, EGgInputAction.MoveBackward, ECgInputEvent.FirstPressed);
+                // MoveBackward -> StopMoveBackward
+            CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StopMoveBackward, EGgInputAction.MoveBackward, ECgInputEvent.FirstReleased);
+                // Jump -> StartJump
+            CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StartJump, EGgInputAction.Jump, ECgInputEvent.FirstPressed);
+                // Jump -> StopJump
+            CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StopJump, EGgInputAction.Jump, ECgInputEvent.FirstReleased);
+                // Fire -> StartFire
+            CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StartFire, EGgInputAction.Fire, ECgInputEvent.FirstPressed);
+                // Fire -> StopFire
+            CreateGameEventDefinitionSimple(GameEventDefinitions_Game, EGgGameEvent.StopFire, EGgInputAction.Fire, ECgInputEvent.FirstReleased);
         }
 
         protected override void BindInputs()
@@ -60,6 +71,12 @@
 
             // MoveForward
             BindInputAction(KeyCode.D, MoveForward);
+            // MoveBackward
+            BindInputAction(KeyCode.A, MoveBackward);
+            // Jump
+            BindInputAction(KeyCode.W, Jump);
+            // Fire
+            BindInputAction(KeyCode.Space, Fire);
         }
     }
 }
