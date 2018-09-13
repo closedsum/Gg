@@ -51,6 +51,8 @@ Temporary Items
 # =========================
 *.cs.meta
 *.meta
+*.mat
+*.physicMaterial
 *.sln
 *.csproj
 .vs/
@@ -61,4 +63,5 @@ ProjectSettings/
 Assets/Scripts/CgCore/
 Assets/Scenes/
 Assets/UnityPackages/
+Assets/Standard Assets/
 Temp/
