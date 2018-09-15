@@ -61,6 +61,7 @@ obj/
 Packages/
 ProjectSettings/
 Assets/Scripts/CgCore/
+Assets/Scripts/Editor/CgEditor/
 Assets/Scenes/
 Assets/UnityPackages/
 Assets/Standard Assets/

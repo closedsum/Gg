@@ -11,6 +11,8 @@
         public static readonly FECgInputAction Fire = EMCgInputAction.Get().Create("Fire");
         // GameMenu
         public static readonly FECgInputAction OpenCloseGameMenu = EMCgInputAction.Get().Create("OpenCloseGameMenu");
+
+        public static void Init() { }
     }
 
     public static class EGgInputActionMap
