@@ -45,9 +45,7 @@
         public override void Init()
         {
             // Initialize EnumClassMaps
-            EGgGameInstanceState.Init();
-            EGgTime.Init();
-            EGgCoroutineSchedule.Init();
+            FCgEnumClassLinker.Init();
 
             CurrentState = EGgGameInstanceState.OnBoard;
 
