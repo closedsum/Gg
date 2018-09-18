@@ -18,6 +18,9 @@ public static class FCgEnumClassLinker
         EGgWeaponState.Init();
         EGgWeaponSlot.Init();
         EGgWeaponFireMode.Init();
+        EGgWeaponSound.Init();
         EGgData_Weapon_FireMode.Init();
+        EGgWeaponGrip.Init();
+        EGgWeaponOwner.Init();
     }
 }

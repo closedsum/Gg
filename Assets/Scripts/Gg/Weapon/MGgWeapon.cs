@@ -8,6 +8,11 @@
 
     public class MGgWeapon : MCgWeapon
     {
+        void Awake()
+        {
+            if (bPlacedInWorld)
+                Init();
+        }
 
         // Use this for initialization
         void Start()
@@ -31,7 +36,11 @@
             PrimaryFireMode = EGgWeaponFireMode.Primary;
 
             FiringState = EGgWeaponState.Firing;
-            //FireSound = EGgWeaponSound
+            FireSound = EGgWeaponSound.Fire;
+
+            ReloadingState = EGgWeaponState.Reloading;
+
+            InitMultiValueMembers();
         }
     }
 }

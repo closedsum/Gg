@@ -30,6 +30,13 @@
         public static void Init() { }
     }
 
+    public static class EGgWeaponSound
+    {
+        public static readonly FECgWeaponSound Fire = EMCgWeaponSound.Get().Create("Fire");
+
+        public static void Init() { }
+    }
+
     public static class EGgData_Weapon_FireMode
     {
         public static readonly FECgData_Weapon_FireMode Firing = EMCgData_Weapon_FireMode.Get().Create("Firing");
@@ -37,6 +44,20 @@
         public static readonly FECgData_Weapon_FireMode Aiming = EMCgData_Weapon_FireMode.Get().Create("Aiming");
         public static readonly FECgData_Weapon_FireMode FXs = EMCgData_Weapon_FireMode.Get().Create("FXs");
         public static readonly FECgData_Weapon_FireMode Sounds = EMCgData_Weapon_FireMode.Get().Create("Sounds");
+
+        public static void Init() { }
+    }
+
+    public static class EGgWeaponGrip
+    {
+        public static readonly FECgWeaponGrip Default = EMCgWeaponGrip.Get().Create("Default");
+
+        public static void Init() { }
+    }
+
+    public static class EGgWeaponOwner
+    {
+        public static readonly FECgWeaponOwner Character = EMCgWeaponOwner.Get().Create("Character");
 
         public static void Init() { }
     }
