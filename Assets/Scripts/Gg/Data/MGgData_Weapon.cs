@@ -20,6 +20,8 @@
         [NonSerialized]
         public FGgData_Weapon_FireMode FireMode;
 
+        public override FCgData_Weapon_FireMode GetFireModeClass(FECgWeaponFireMode fireMode) { return FireMode; }
+
         public override bool UseFakeProjectile(FECgWeaponFireMode fireMode)
         {
             return FireMode.Firing.bUseFake;

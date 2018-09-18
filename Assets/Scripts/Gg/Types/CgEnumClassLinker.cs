@@ -14,5 +14,10 @@ public static class FCgEnumClassLinker
         EGgCoroutineSchedule.Init();
         EGgAssetType.Init();
         EGgInputAction.Init();
+
+        EGgWeaponState.Init();
+        EGgWeaponSlot.Init();
+        EGgWeaponFireMode.Init();
+        EGgData_Weapon_FireMode.Init();
     }
 }
