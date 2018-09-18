@@ -12,6 +12,7 @@ public static class FCgEnumClassLinker
         EGgGameInstanceState.Init();
         EGgTime.Init();
         EGgCoroutineSchedule.Init();
+        EGgAssetType.Init();
         EGgInputAction.Init();
     }
 }
