@@ -10,8 +10,6 @@
     {
         void Awake()
         {
-            if (bPlacedInWorld)
-                Init();
         }
 
         // Use this for initialization
