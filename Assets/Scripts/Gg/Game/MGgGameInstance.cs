@@ -121,6 +121,7 @@
 
         protected void AutoPossessPawns()
         {
+            // Players
             MGgPawn[] pawns = FindObjectsOfType<MGgPawn>();
 
             foreach (MGgPawn p in pawns)
@@ -128,8 +129,6 @@
                 if (p.bAutoPossess)
                 {
                     bool possessed = false;
-
-                    // Players
 
                     // Auto Assign Controller
                     if (p.ControllerIndex <= AUTO_ASSIGN_CONTROLLER)

@@ -6,7 +6,7 @@
 
     using CgCore;
 
-    public class MGgPawn : MCgPawn
+    public class MGgPawn : MCgPlayerPawn
     {
 
         // Use this for initialization

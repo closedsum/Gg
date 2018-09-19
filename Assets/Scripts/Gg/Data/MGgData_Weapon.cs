@@ -40,6 +40,8 @@
         [SerializeField]
         public int MaxAmmo;
 
+        public override string GetMaxAmmoMemberName() { return "MaxAmmo"; }
+
         public override int GetMaxAmmo()
         {
             return MaxAmmo;
@@ -51,31 +53,26 @@
         /** Flag for allowing the recharging of ammo over time */
         [SerializeField]
         public bool bRechargeAmmoDuringFire;
+
         /** Time after firing until recharge starts */
         [SerializeField]
         public float RechargeStartupDelay;
 
-        public override float GetRechargeStartupDelay()
-        {
-            return RechargeStartupDelay;
-        }
+        public override string GetRechargeStartupDelayMemberName() { return "RechargeStartupDelay"; }
+        public override float GetRechargeStartupDelay(){ return RechargeStartupDelay; }
 
         /** Time to recharge / refresh 1 ammo */
         [SerializeField]
         public float RechargeSecondsPerAmmo;
 
-        public override float GetRechargeSecondsPerAmmo()
-        {
-            return RechargeSecondsPerAmmo;
-        }
+        public override string GetRechargeSecondsPerAmmoMemberName() { return "RechargeSecondsPerAmmo"; }
+        public override float GetRechargeSecondsPerAmmo(){ return RechargeSecondsPerAmmo; }
 
         [SerializeField]
         public float ReloadTime;
 
-        public override float GetReloadTime()
-        {
-            return ReloadTime;
-        }
+        public override string GetReloadTimeMemberName() { return "ReloadTime"; }
+        public override float GetReloadTime(){ return ReloadTime; }
 
         [SerializeField]
         public float EquipTime;

@@ -9,6 +9,7 @@
     public static class EGgAssetType
     {
         public static readonly FECgAssetType Weapons = EMCgAssetType.Get().Create("Weapons");
+        public static readonly FECgAssetType WeaponMaterialSkins = EMCgAssetType.Get().Create("WeaponMaterialSkins");
 
         public static void Init() { }
     }
