@@ -8,11 +8,15 @@
 
     public class MGgDataMapping : MCgDataMapping
     {
+        #region "Data Members"
+
         public List<MGgData_Weapon> Weapons;
         public Dictionary<string, MGgData_Weapon> Weapons_Map;
 
         public List<MGgData_WeaponMaterialSkin> WeaponMaterialSkins;
         public Dictionary<string, MGgData_WeaponMaterialSkin> WeaponMaterialSkins_Map;
+
+        #endregion // Data Members
 
         protected override void Init_Internal()
         {

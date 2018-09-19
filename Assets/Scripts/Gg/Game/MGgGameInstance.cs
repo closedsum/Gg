@@ -38,6 +38,7 @@
 
         #region "Data Members"
 
+        [FCgReadOnly]
         public MGgPlayerController Player;
 
         #endregion // Data Members
@@ -69,7 +70,7 @@
             Player.Init();
 
             // TODO: Move to OnBoarding in Game
-            AutoPossessPawns();
+            SetupExisting_Pawns();
         }
 
         // Use this for initialization
@@ -119,13 +120,14 @@
 
         }
 
-        protected void AutoPossessPawns()
+        protected void SetupExisting_Pawns()
         {
             // Players
             MGgPawn[] pawns = FindObjectsOfType<MGgPawn>();
 
             foreach (MGgPawn p in pawns)
             {
+                // Auto Possess
                 if (p.bAutoPossess)
                 {
                     bool possessed = false;
@@ -172,6 +174,8 @@
                         }
                     }
                 }
+
+                p.Init();
             }
         }
     }

@@ -115,6 +115,9 @@
 
         public override void Init()
         {
+            S_AssetType.Name = EGgAssetType.Weapons;
+
+            base.Init();
 #if UNITY_EDITOR
             // FireMode
             {

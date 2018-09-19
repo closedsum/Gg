@@ -20,6 +20,9 @@
 
         public override void Init()
         {
+            S_AssetType.Name = EGgAssetType.WeaponMaterialSkins;
+
+            base.Init();
 #if UNITY_EDITOR
             if (S_Materials.Materials.Paths != null)
             {
