@@ -38,10 +38,6 @@
 
         #region "Data Members"
 
-        // TODO: Move into GameState
-        [FCgReadOnly]
-        public MGgPlayerController Player;
-
         #endregion // Data Members
 
         public override void Init()
@@ -60,19 +56,7 @@
             GameState       = gogs.AddComponent<MGgGameState>();
 
             GameState.Init();
-
-            // TODO: Move into GameState
-            GameObject gopc = MonoBehaviour.Instantiate(FCgManager_Prefab.Get().EmptyGameObject);
-            gopc.name       = "MGgPlayerController";
-            PlayerControllers.Add(gopc.AddComponent<MGgPlayerController>());
-
-            Player = (MGgPlayerController)PlayerControllers[0];
-
-            Player.Index = 0;
-            Player.Init();
-
-            // TODO: Move to OnBoarding in Game
-            SetupExisting_Pawns();
+            GameState.OnBeginPlay();
         }
 
         // Use this for initialization
@@ -124,67 +108,6 @@
             float deltaTime = FCgManager_Time.Get().GetDeltaTime(EGgTime.Game);
 
             GameState.OnUpdate(deltaTime);
-        }
-
-        protected void SetupExisting_Pawns()
-        {
-            // Players
-            MGgPawn[] pawns = FindObjectsOfType<MGgPawn>();
-
-            foreach (MGgPawn p in pawns)
-            {
-                // Auto Possess
-                if (p.bAutoPossess)
-                {
-                    bool possessed = false;
-
-                    // Auto Assign Controller
-                    if (p.ControllerIndex <= AUTO_ASSIGN_CONTROLLER)
-                    {
-                        foreach (MCgPlayerController pc in PlayerControllers)
-                        {
-                            if (pc.Pawn != null)
-                            {
-                                pc.Possess(p);
-
-                                possessed = true;
-                                break;
-                            }
-                        }
-
-                        if (!possessed)
-                        {
-                            FCgDebug.LogWarning("MGgGameInstance.AutoPossessPawns: Failed to AutoPossess Pawn: " + p.name + " of type: " + p.GetType().ToString());
-                        }
-                    }
-                    // Search for controller with matching index
-                    else
-                    {
-                        if (p.ControllerIndex >= PlayerControllers.Count)
-                        {
-                            FCgDebug.LogWarning("MGgGameInstance.AutoPossessPawns: Failed to AutoPossess Pawn: " + p.name + " of type: " + p.GetType().ToString() + ". No PlayerController found with index: " + p.ControllerIndex);
-                        }
-                        else
-                        {
-                            int index = p.ControllerIndex;
-
-                            if (PlayerControllers[index].Pawn != null)
-                            {
-                                FCgDebug.LogWarning("MGgGameInstance.AutoPossessPawns: Failed to AutoPossess Pawn: " + p.name + " of type: " + p.GetType().ToString());
-                                FCgDebug.LogWarning("MGgGameInstance.AutoPossessPawns: PlayerController with index: " + index + " is already possessing Pawn: " + PlayerControllers[index].Pawn.name);
-                            }
-                            else
-                            {
-                                PlayerControllers[index].Possess(p);
-                            }
-                        }
-                    }
-                }
-
-                p.bPlacedInWorld = true;
-
-                p.Init();
-            }
         }
     }
 }
