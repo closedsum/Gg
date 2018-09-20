@@ -38,6 +38,7 @@
 
         #region "Data Members"
 
+        // TODO: Move into GameState
         [FCgReadOnly]
         public MGgPlayerController Player;
 
@@ -60,6 +61,7 @@
 
             GameState.Init();
 
+            // TODO: Move into GameState
             GameObject gopc = MonoBehaviour.Instantiate(FCgManager_Prefab.Get().EmptyGameObject);
             gopc.name       = "MGgPlayerController";
             PlayerControllers.Add(gopc.AddComponent<MGgPlayerController>());
@@ -117,7 +119,11 @@
 
         protected void OnUpdate_Game()
         {
+            FCgManager_Time.Get().Update(EGgTime.Game);
 
+            float deltaTime = FCgManager_Time.Get().GetDeltaTime(EGgTime.Game);
+
+            GameState.OnUpdate(deltaTime);
         }
 
         protected void SetupExisting_Pawns()
@@ -174,6 +180,8 @@
                         }
                     }
                 }
+
+                p.bPlacedInWorld = true;
 
                 p.Init();
             }

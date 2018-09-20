@@ -7,30 +7,6 @@
 
     using CgCore;
 
-    [Serializable]
-    public struct S_FGgPlayerInfo
-    {
-        public string Character;
-        public string MeshSkin;
-        public string MaterialSkin;
-        public string Weapon;
-        public string WeaponMaterialSkin;
-    }
-
-    public class FGgPlayerInfo
-    {
-        public string Character;
-        public string MeshSkin;
-        public string MaterialSkin;
-        public string Weapon;
-        public string WeaponMaterialSkin;
-
-        public bool IsValid()
-        {
-            return false;
-        }
-    }
-
     public class MGgPawn : MCgTpsPawn
     {
         #region "CVars"
@@ -70,6 +46,8 @@
         {
             base.Init();
 
+            bCacheData = true;
+
             MyInfo = new FGgPlayerInfo();
 
             MyInfo.Character = S_MyInfo.Character;
@@ -81,7 +59,31 @@
 
         public override void OnUpdate(float deltaTime)
         {
-            
+            // TODO: Make it so only OnBoard'd pawns get OnUpdate call
+            if (!IsOnBoardCompleted_Game())
+                return;
+
+            OnUpdate_HandleSetup();
+
+            if (CharacterState != EGgCharacterState.Spawned)
+                return;
+
+            OnPreUpdate(deltaTime);
+            {
+                /*
+                MGgPlayerState myPlayerState = (MGgPlayerState)PlayerState;
+
+                // Movement
+                myPlayerState.CurrentSnapShot_Record_Pawn();
+                myPlayerState.CurrentSnapShot_Record_Velocity();
+                */
+                // Weapons
+                for (int i = 0; i < CurrentWeaponCount; ++i)
+                {
+                    Weapons[i].OnUpdate(deltaTime);
+                }
+            }
+            OnPostUpdate(deltaTime);
         }
 
         #region "Setup"
@@ -99,7 +101,7 @@
 
                 if (LogCharacterSetup.Log())
                 {
-                    FCgDebug.Log("MGgPawn.OnTick_HandleSetup: Character Setup Change: SetDataCharacter -> ApplyDataCharacer");
+                    FCgDebug.Log("MGgPawn.OnUpdate_HandleSetup: Character Setup Change: SetDataCharacter -> ApplyDataCharacer");
                 }
                 CharacterSetup = EGgCharacterSetup.ApplyDataCharacer;
             }
@@ -110,7 +112,7 @@
 
                 if (LogCharacterSetup.Log())
                 {
-                    FCgDebug.Log("MGgPawn.OnTick_HandleSetup: Character Setup Change: ApplyDataCharacer -> ApplyDataWeapon");
+                    FCgDebug.Log("MGgPawn.OnUpdate_HandleSetup: Character Setup Change: ApplyDataCharacer -> ApplyDataWeapon");
                 }
                 CharacterSetup = EGgCharacterSetup.ApplyDataWeapon;
             }
@@ -121,7 +123,7 @@
 
                 if (LogCharacterSetup.Log())
                 {
-                    FCgDebug.Log("MGgPawn.OnTick_HandleSetup: Character Setup Change: ApplyDataWeapon -> Finished");
+                    FCgDebug.Log("MGgPawn.OnUpdate_HandleSetup: Character Setup Change: ApplyDataWeapon -> Finished");
                 }
                 CharacterSetup = EGgCharacterSetup.Finished;
             }
@@ -135,9 +137,7 @@
                 ++SpawnCount;
                 bSpawnedAndActive = true;
 
-                MGgPlayerState myPlayerState = null; //Cast<AMboPlayerState>(PlayerState);
-
-                OnSetup_Finished_Event.Broadcast(myPlayerState.UniqueMappingId);
+                OnSetup_Finished_Event.Broadcast(PlayerState.UniqueMappingId);
             }
             CharacterState = EGgCharacterState.Spawned;
         }
@@ -151,8 +151,8 @@
             MGgDataMapping dataMapping   = MCgDataMapping.Get<MGgDataMapping>();
             MGgPlayerState myPlayerState = (MGgPlayerState)PlayerState;
 
-            //if (!bPlacedInWorld || !MyInfo.IsValid())
-            //    MyInfo = MyPlayerState->AIData.Info;
+            if (!bPlacedInWorld || !MyInfo.IsValid())
+                MyInfo.Copy(myPlayerState.PlayerData.Info);
 
             MyData_Character = dataMapping.LoadData<MGgData_Character>(EGgAssetType.Characters, MyInfo.Character);
 
@@ -185,10 +185,6 @@
         {
         }
 
-        public override void ApplyData_Weapon()
-        {
-            
-        }
         #endregion // Data
     }
 }

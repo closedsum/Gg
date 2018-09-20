@@ -29,6 +29,12 @@
 
     public class MGgPlayerState : MCgPlayerState
     {
+        #region "Data Members"
+
+        public FGgPlayerData PlayerData;
+
+        #endregion // Data Members
+
         public override void Init()
         {
             base.Init();
