@@ -79,6 +79,11 @@
             MyInfo.WeaponMaterialSkin = S_MyInfo.WeaponMaterialSkin;
         }
 
+        public override void OnUpdate(float deltaTime)
+        {
+            
+        }
+
         #region "Setup"
 
         public override void OnUpdate_HandleSetup()
@@ -176,6 +181,14 @@
             }
         }
 
+        public override void ApplyData_Character()
+        {
+        }
+
+        public override void ApplyData_Weapon()
+        {
+            
+        }
         #endregion // Data
     }
 }
