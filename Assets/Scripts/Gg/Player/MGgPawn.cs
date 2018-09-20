@@ -11,6 +11,8 @@
     public struct S_FGgPlayerInfo
     {
         public string Character;
+        public string MeshSkin;
+        public string MaterialSkin;
         public string Weapon;
         public string WeaponMaterialSkin;
     }
@@ -18,6 +20,8 @@
     public class FGgPlayerInfo
     {
         public string Character;
+        public string MeshSkin;
+        public string MaterialSkin;
         public string Weapon;
         public string WeaponMaterialSkin;
 
@@ -27,7 +31,7 @@
         }
     }
 
-    public class MGgPawn : MCgPlayerPawn
+    public class MGgPawn : MCgTpsPawn
     {
         #region "CVars"
 
@@ -68,9 +72,10 @@
 
             MyInfo = new FGgPlayerInfo();
 
-            // TODO: Move to SetDatas
             MyInfo.Character = S_MyInfo.Character;
-            MyInfo.Weapon = S_MyInfo.Character;
+            MyInfo.MeshSkin = S_MyInfo.MeshSkin;
+            MyInfo.MaterialSkin = S_MyInfo.MaterialSkin;
+            MyInfo.Weapon = S_MyInfo.Weapon;
             MyInfo.WeaponMaterialSkin = S_MyInfo.WeaponMaterialSkin;
         }
 
@@ -133,5 +138,44 @@
         }
 
         #endregion // Setup
+
+        #region "Data"
+
+        public override void SetDatas()
+        {
+            MGgDataMapping dataMapping   = MCgDataMapping.Get<MGgDataMapping>();
+            MGgPlayerState myPlayerState = (MGgPlayerState)PlayerState;
+
+            //if (!bPlacedInWorld || !MyInfo.IsValid())
+            //    MyInfo = MyPlayerState->AIData.Info;
+
+            MyData_Character = dataMapping.LoadData<MGgData_Character>(EGgAssetType.Characters, MyInfo.Character);
+
+            MyData_CharacterMeshSkin = dataMapping.LoadData<MGgData_CharacterMeshSkin>(EGgAssetType.CharacterMeshSkins, MyInfo.MeshSkin);
+            MyData_CharacterMaterialSkin = dataMapping.LoadData<MGgData_CharacterMaterialSkin>(EGgAssetType.CharacterMaterialSkins, MyInfo.MaterialSkin);
+
+            Data_Weapons.Clear();
+
+            CurrentWeaponCount = 1;
+
+            //Data_Weapons.Reserve(CurrentWeaponCount);
+
+            for (int i = 0; i < CurrentWeaponCount; ++i)
+            {
+                MGgData_Weapon data = dataMapping.LoadData<MGgData_Weapon>(EGgAssetType.Weapons, MyInfo.Weapon);
+                Data_Weapons.Add(data);
+            }
+
+            Data_WeaponMaterialSkins.Clear();
+            //Data_WeaponMaterialSkins.Reserve(CurrentWeaponCount);
+
+            for (int i = 0; i < CurrentWeaponCount; ++i)
+            {
+                MGgData_WeaponMaterialSkin data = dataMapping.LoadData<MGgData_WeaponMaterialSkin>(EGgAssetType.WeaponMaterialSkins, MyInfo.WeaponMaterialSkin);
+                Data_WeaponMaterialSkins.Add(data);
+            }
+        }
+
+        #endregion // Data
     }
 }
