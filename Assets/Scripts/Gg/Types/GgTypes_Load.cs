@@ -13,6 +13,7 @@
         public static readonly FECgAssetType CharacterMaterialSkins = EMCgAssetType.Get().Create("CharacterMaterialSkins");
         public static readonly FECgAssetType Weapons = EMCgAssetType.Get().Create("Weapons");
         public static readonly FECgAssetType WeaponMaterialSkins = EMCgAssetType.Get().Create("WeaponMaterialSkins");
+        public static readonly FECgAssetType Projectiles = EMCgAssetType.Get().Create("Projectiles");
 
         public static void Init() { }
     }

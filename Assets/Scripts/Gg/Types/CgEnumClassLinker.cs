@@ -22,5 +22,7 @@ public static class FCgEnumClassLinker
         EGgData_Weapon_FireMode.Init();
         EGgWeaponGrip.Init();
         EGgWeaponOwner.Init();
+
+        EGgProjectileType.Init();
     }
 }
