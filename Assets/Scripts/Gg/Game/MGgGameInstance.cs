@@ -95,7 +95,7 @@
         {
             FCgManager_Time.Get().Update(EGgTime.Menu);
 
-            float deltaTime = FCgManager_Time.Get().GetDeltaTime(EGgTime.Menu);
+            //float deltaTime = FCgManager_Time.Get().GetDeltaTime(EGgTime.Menu);
 
             // Get Input
 
