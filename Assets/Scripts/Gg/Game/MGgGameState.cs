@@ -28,7 +28,6 @@
         {
             base.Init();
 
-            // TODO: Move into GameState
             GameObject gopc = MonoBehaviour.Instantiate(FCgManager_Prefab.Get().EmptyGameObject);
             gopc.name = "MGgPlayerController";
             PlayerControllers.Add(gopc.AddComponent<MGgPlayerController>());
@@ -37,6 +36,10 @@
 
             Player.Index = 0;
             Player.Init();
+
+            ICgManager_Projectile.Init(typeof(FCgManager_Projectile));
+            ICgManager_Projectile.Get().TypeMap.Add(EGgProjectileType.Bullet, typeof(MGgProjectile));
+            ICgManager_Projectile.Get().CreatePool(EGgProjectileType.Bullet, 10);
         }
 
         public override void OnUpdate(float deltaTime)

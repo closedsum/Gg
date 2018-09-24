@@ -33,6 +33,12 @@
             {
                 // MoveForward
                 DefineInputActionValue(ref MoveForward, EGgInputAction.MoveForward, EGgInputActionMap.Game.Value);
+                // MoveBackward
+                DefineInputActionValue(ref MoveBackward, EGgInputAction.MoveBackward, EGgInputActionMap.Game.Value);
+                // Jump
+                DefineInputActionValue(ref Jump, EGgInputAction.Jump, EGgInputActionMap.Game.Value);
+                // Fire
+                DefineInputActionValue(ref Fire, EGgInputAction.Fire, EGgInputActionMap.Game.Value);
             }
 
             // Define GameEvent Definitions

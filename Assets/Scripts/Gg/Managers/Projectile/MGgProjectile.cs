@@ -10,9 +10,9 @@
     {
         #region "Interface"
 
-        public override void Init(int index, object e)
+        public override void Init<FECgProjectileType, MCgProjectile, FCgProjectilePayload, FCgProjectileCache>(int index, FECgProjectileType e)
         {
-            base.Init(index, e);
+            base.Init<FECgProjectileType, MCgProjectile, FCgProjectilePayload, FCgProjectileCache>(index, e);
 
             bMeshComponent = true;
             bCollider = true;
